@@ -1,0 +1,347 @@
+[
+  {
+    "width": 320,
+    "route": "/",
+    "metrics": {
+      "innerWidth": 320,
+      "innerHeight": 800,
+      "scrollWidth": 320,
+      "scrollHeight": 3480,
+      "overflow": false,
+      "offscreen": [
+        {
+          "tag": "BUTTON",
+          "text": "HI",
+          "left": 315.109375,
+          "right": 371.421875,
+          "top": 57.390625,
+          "bottom": 89.390625
+        }
+      ],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 320,
+    "route": "/?join=1",
+    "metrics": {
+      "innerWidth": 320,
+      "innerHeight": 800,
+      "scrollWidth": 320,
+      "scrollHeight": 2051,
+      "overflow": false,
+      "offscreen": [
+        {
+          "tag": "BUTTON",
+          "text": "HI",
+          "left": 315.109375,
+          "right": 371.421875,
+          "top": 57.390625,
+          "bottom": 89.390625
+        }
+      ],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 320,
+    "route": "/chains",
+    "metrics": {
+      "innerWidth": 320,
+      "innerHeight": 800,
+      "scrollWidth": 320,
+      "scrollHeight": 1391,
+      "overflow": false,
+      "offscreen": [
+        {
+          "tag": "BUTTON",
+          "text": "HI",
+          "left": 315.109375,
+          "right": 371.421875,
+          "top": 57.390625,
+          "bottom": 89.390625
+        }
+      ],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 320,
+    "route": "/map",
+    "metrics": {
+      "innerWidth": 320,
+      "innerHeight": 800,
+      "scrollWidth": 320,
+      "scrollHeight": 3021,
+      "overflow": false,
+      "offscreen": [
+        {
+          "tag": "BUTTON",
+          "text": "HI",
+          "left": 315.109375,
+          "right": 371.421875,
+          "top": 57.390625,
+          "bottom": 89.390625
+        }
+      ],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 320,
+    "route": "/about",
+    "metrics": {
+      "innerWidth": 320,
+      "innerHeight": 800,
+      "scrollWidth": 320,
+      "scrollHeight": 3729,
+      "overflow": false,
+      "offscreen": [
+        {
+          "tag": "BUTTON",
+          "text": "HI",
+          "left": 315.109375,
+          "right": 371.421875,
+          "top": 57.390625,
+          "bottom": 89.390625
+        }
+      ],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 375,
+    "route": "/",
+    "metrics": {
+      "innerWidth": 375,
+      "innerHeight": 812,
+      "scrollWidth": 375,
+      "scrollHeight": 3511,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 375,
+    "route": "/?join=1",
+    "metrics": {
+      "innerWidth": 375,
+      "innerHeight": 812,
+      "scrollWidth": 375,
+      "scrollHeight": 2024,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 375,
+    "route": "/chains",
+    "metrics": {
+      "innerWidth": 375,
+      "innerHeight": 812,
+      "scrollWidth": 375,
+      "scrollHeight": 1317,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 375,
+    "route": "/map",
+    "metrics": {
+      "innerWidth": 375,
+      "innerHeight": 812,
+      "scrollWidth": 375,
+      "scrollHeight": 2931,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 375,
+    "route": "/about",
+    "metrics": {
+      "innerWidth": 375,
+      "innerHeight": 812,
+      "scrollWidth": 375,
+      "scrollHeight": 3250,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "route": "/",
+    "metrics": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 3547,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "route": "/?join=1",
+    "metrics": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 2010,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "route": "/chains",
+    "metrics": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 1317,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "route": "/map",
+    "metrics": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 2874,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 390,
+    "route": "/about",
+    "metrics": {
+      "innerWidth": 390,
+      "innerHeight": 844,
+      "scrollWidth": 390,
+      "scrollHeight": 3109,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 412,
+    "route": "/",
+    "metrics": {
+      "innerWidth": 412,
+      "innerHeight": 915,
+      "scrollWidth": 412,
+      "scrollHeight": 3598,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 412,
+    "route": "/?join=1",
+    "metrics": {
+      "innerWidth": 412,
+      "innerHeight": 915,
+      "scrollWidth": 412,
+      "scrollHeight": 2018,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 412,
+    "route": "/chains",
+    "metrics": {
+      "innerWidth": 412,
+      "innerHeight": 915,
+      "scrollWidth": 412,
+      "scrollHeight": 1293,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 412,
+    "route": "/map",
+    "metrics": {
+      "innerWidth": 412,
+      "innerHeight": 915,
+      "scrollWidth": 412,
+      "scrollHeight": 2779,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  },
+  {
+    "width": 412,
+    "route": "/about",
+    "metrics": {
+      "innerWidth": 412,
+      "innerHeight": 915,
+      "scrollWidth": 412,
+      "scrollHeight": 3034,
+      "overflow": false,
+      "offscreen": [],
+      "title": "Смысловой телефон — передай мысль дальше"
+    },
+    "errors": [],
+    "failed": []
+  }
+]

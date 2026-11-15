@@ -1,0 +1,461 @@
+{
+  "completed": [
+    {
+      "language": "ru",
+      "country": "RU",
+      "public_code": "Ju5T9yrhXJ",
+      "hops": [
+        {
+          "hop": 1,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 0,
+            "text": "Сомнение бывает формой заботы о будущем хотя внешне ничего не происходит. Только один человек знает, что было до этого.",
+            "is_seed": true
+          },
+          "submitted": {
+            "id": "3d2f4ccf-bb69-452f-93e3-6522ef3f17c6",
+            "hop_index": 1,
+            "text": "Проверочный ход 1 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.269Z"
+          }
+        },
+        {
+          "hop": 2,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 1,
+            "text": "Проверочный ход 1 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "592b5198-ca8d-41b0-bde8-ab6478dd4028",
+            "hop_index": 2,
+            "text": "Проверочный ход 2 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.314Z"
+          }
+        },
+        {
+          "hop": 3,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 2,
+            "text": "Проверочный ход 2 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "b5f8c43d-8a62-41f8-b7a8-784ca49c80fc",
+            "hop_index": 3,
+            "text": "Проверочный ход 3 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.356Z"
+          }
+        },
+        {
+          "hop": 4,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 3,
+            "text": "Проверочный ход 3 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "6527acf7-e258-43b0-82e4-3b86fa11df84",
+            "hop_index": 4,
+            "text": "Проверочный ход 4 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.396Z"
+          }
+        },
+        {
+          "hop": 5,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 4,
+            "text": "Проверочный ход 4 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "aa53360c-186e-4edc-8130-baa68fe3633d",
+            "hop_index": 5,
+            "text": "Проверочный ход 5 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.465Z"
+          }
+        },
+        {
+          "hop": 6,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 5,
+            "text": "Проверочный ход 5 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "4b7b6359-1303-456b-9f94-fa0be90019ae",
+            "hop_index": 6,
+            "text": "Проверочный ход 6 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.500Z"
+          }
+        },
+        {
+          "hop": 7,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 6,
+            "text": "Проверочный ход 6 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "1e18d34d-c363-42aa-8741-7f661ec539f0",
+            "hop_index": 7,
+            "text": "Проверочный ход 7 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.538Z"
+          }
+        },
+        {
+          "hop": 8,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 7,
+            "text": "Проверочный ход 7 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "5a78f3f3-ac66-40d3-b248-4fd72d78cd33",
+            "hop_index": 8,
+            "text": "Проверочный ход 8 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.576Z"
+          }
+        },
+        {
+          "hop": 9,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 8,
+            "text": "Проверочный ход 8 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "6d5bcb0e-9287-409b-91ae-86b05f35fb7e",
+            "hop_index": 9,
+            "text": "Проверочный ход 9 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.617Z"
+          }
+        },
+        {
+          "hop": 10,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 9,
+            "text": "Проверочный ход 9 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "1dc5e409-47b8-4754-abd0-8dd1c8eb9c03",
+            "hop_index": 10,
+            "text": "Проверочный ход 10 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.653Z"
+          }
+        },
+        {
+          "hop": 11,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 10,
+            "text": "Проверочный ход 10 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "f5805f61-4c3c-4551-a449-ffaa203e9fe6",
+            "hop_index": 11,
+            "text": "Проверочный ход 11 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.688Z"
+          }
+        },
+        {
+          "hop": 12,
+          "code": "Ju5T9yrhXJ",
+          "previous": {
+            "hop_index": 11,
+            "text": "Проверочный ход 11 сохраняет смысл и добавляет новый оттенок.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "b761248b-c08f-47ba-9f61-07bc0bb54941",
+            "hop_index": 12,
+            "text": "Проверочный ход 12 сохраняет смысл и добавляет новый оттенок.",
+            "word_count": 9,
+            "created_at": "2026-11-15T14:45:23.722Z"
+          }
+        }
+      ]
+    },
+    {
+      "language": "en",
+      "country": "US",
+      "public_code": "41itNA437m",
+      "hops": [
+        {
+          "hop": 1,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 0,
+            "text": "Небольшая доброта иногда меняет весь день другого человека.",
+            "is_seed": true
+          },
+          "submitted": {
+            "id": "432a4ff6-a5c8-496a-b0f9-e8e373d88f65",
+            "hop_index": 1,
+            "text": "Verification turn 1 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.764Z"
+          }
+        },
+        {
+          "hop": 2,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 1,
+            "text": "Verification turn 1 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "f00405f1-6817-40b4-b10b-ff293d2012c6",
+            "hop_index": 2,
+            "text": "Verification turn 2 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.802Z"
+          }
+        },
+        {
+          "hop": 3,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 2,
+            "text": "Verification turn 2 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "8d7a8273-0a57-4593-9b9b-ca72a174a36d",
+            "hop_index": 3,
+            "text": "Verification turn 3 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.846Z"
+          }
+        },
+        {
+          "hop": 4,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 3,
+            "text": "Verification turn 3 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "1ba1024e-55ac-4598-96c2-5db808258b8c",
+            "hop_index": 4,
+            "text": "Verification turn 4 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.883Z"
+          }
+        },
+        {
+          "hop": 5,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 4,
+            "text": "Verification turn 4 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "64b9e49a-7b38-4828-bcb1-163c689c2f49",
+            "hop_index": 5,
+            "text": "Verification turn 5 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.919Z"
+          }
+        },
+        {
+          "hop": 6,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 5,
+            "text": "Verification turn 5 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "41ec1d26-ee8e-4919-8259-1e0c8b8fcf52",
+            "hop_index": 6,
+            "text": "Verification turn 6 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.956Z"
+          }
+        },
+        {
+          "hop": 7,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 6,
+            "text": "Verification turn 6 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "5e618337-8f0b-4981-938c-c8c1d453ba8c",
+            "hop_index": 7,
+            "text": "Verification turn 7 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:23.993Z"
+          }
+        },
+        {
+          "hop": 8,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 7,
+            "text": "Verification turn 7 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "1d083ece-d636-4e6d-8cf2-94a48d5c2d14",
+            "hop_index": 8,
+            "text": "Verification turn 8 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:24.028Z"
+          }
+        },
+        {
+          "hop": 9,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 8,
+            "text": "Verification turn 8 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "33b452cb-15b7-4213-af62-78049393dfee",
+            "hop_index": 9,
+            "text": "Verification turn 9 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:24.062Z"
+          }
+        },
+        {
+          "hop": 10,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 9,
+            "text": "Verification turn 9 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "79d8dd26-81d4-44c6-a4a1-5eccca39754c",
+            "hop_index": 10,
+            "text": "Verification turn 10 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:24.098Z"
+          }
+        },
+        {
+          "hop": 11,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 10,
+            "text": "Verification turn 10 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "f2e7c67e-eefa-4e98-9fec-2434ba1436b4",
+            "hop_index": 11,
+            "text": "Verification turn 11 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:24.140Z"
+          }
+        },
+        {
+          "hop": 12,
+          "code": "41itNA437m",
+          "previous": {
+            "hop_index": 11,
+            "text": "Verification turn 11 preserves the meaning and adds a new shade.",
+            "is_seed": false
+          },
+          "submitted": {
+            "id": "70abad1b-201e-4d56-ad49-dfc71abc201a",
+            "hop_index": 12,
+            "text": "Verification turn 12 preserves the meaning and adds a new shade.",
+            "word_count": 11,
+            "created_at": "2026-11-15T14:45:24.197Z"
+          }
+        }
+      ]
+    }
+  ],
+  "stats": {
+    "active_chains": 8,
+    "completed_chains": 4,
+    "saved_messages": 54,
+    "total_participants": 52,
+    "updated_at": "2026-11-15T14:45:24.207Z"
+  },
+  "gallery": {
+    "chains": [
+      {
+        "public_code": "41itNA437m",
+        "language": "en",
+        "theme_title": "Маленькая доброта",
+        "completed_at": "2026-11-15T14:45:24.197Z",
+        "target_hops": 12
+      },
+      {
+        "public_code": "Ju5T9yrhXJ",
+        "language": "ru",
+        "theme_title": "Выбор · 0003",
+        "completed_at": "2026-11-15T14:45:23.722Z",
+        "target_hops": 12
+      },
+      {
+        "public_code": "5qKar8ynUa",
+        "language": "en",
+        "theme_title": "Первая мысль",
+        "completed_at": "2026-11-15T14:40:46.760Z",
+        "target_hops": 12
+      },
+      {
+        "public_code": "aejNMmJVZL",
+        "language": "ru",
+        "theme_title": "Память · 0002",
+        "completed_at": "2026-11-15T14:40:27.961Z",
+        "target_hops": 12
+      }
+    ],
+    "next_cursor": null
+  },
+  "map": {
+    "period": "all",
+    "total_events": 54,
+    "countries": [
+      {
+        "country_code": "RU",
+        "count": 25
+      },
+      {
+        "country_code": "US",
+        "count": 23
+      },
+      {
+        "country_code": "UNKNOWN",
+        "count": 6
+      }
+    ],
+    "updated_at": "2026-11-15T14:45:24.224Z"
+  }
+}

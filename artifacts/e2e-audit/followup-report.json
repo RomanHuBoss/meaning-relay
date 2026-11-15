@@ -1,0 +1,109 @@
+{
+  "generatedAt": "2026-11-15T14:42:52.278Z",
+  "checks": [
+    {
+      "name": "stats expose completions",
+      "ok": true,
+      "detail": "{\"active_chains\":9,\"completed_chains\":2,\"saved_messages\":30,\"total_participants\":28,\"updated_at\":\"2026-11-15T14:42:35.104Z\"}"
+    },
+    {
+      "name": "public chain aejNMmJVZL",
+      "ok": true,
+      "detail": "{\"status\":\"COMPLETED\",\"current\":12,\"messages\":12}"
+    },
+    {
+      "name": "public chain 5qKar8ynUa",
+      "ok": true,
+      "detail": "{\"status\":\"COMPLETED\",\"current\":12,\"messages\":12}"
+    },
+    {
+      "name": "ru gallery finds completed chain",
+      "ok": true,
+      "detail": "RU code present"
+    },
+    {
+      "name": "en gallery finds completed chain",
+      "ok": true,
+      "detail": "EN code present"
+    },
+    {
+      "name": "map reflects completed turns",
+      "ok": true,
+      "detail": "{\"period\":\"all\",\"total_events\":30,\"countries\":[{\"country_code\":\"RU\",\"count\":13},{\"country_code\":\"US\",\"count\":11},{\"country_code\":\"UNKNOWN\",\"count\":6}],\"updated_at\":\"2026-11-15T14:42:35.169Z\"}"
+    },
+    {
+      "name": "public chain 2 UI",
+      "ok": true,
+      "detail": "result layout present"
+    },
+    {
+      "name": "gallery UI shows RU and EN",
+      "ok": true,
+      "detail": "both completed links present"
+    },
+    {
+      "name": "map UI has aggregate rows",
+      "ok": true,
+      "detail": "aggregate row visible"
+    },
+    {
+      "name": "map all-time control",
+      "ok": true,
+      "detail": "all-time active"
+    },
+    {
+      "name": "English interface",
+      "ok": true,
+      "detail": "brand localized"
+    },
+    {
+      "name": "cancel turn screen",
+      "ok": true,
+      "detail": "turn present"
+    },
+    {
+      "name": "cancel returns to home",
+      "ok": true,
+      "detail": "landing present"
+    },
+    {
+      "name": "cancel survives reload",
+      "ok": true,
+      "detail": "verified after 800 ms reload wait"
+    },
+    {
+      "name": "invalid public chain error",
+      "ok": true,
+      "detail": "error state rendered after 900 ms fetch wait"
+    }
+  ],
+  "errors": [],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "screenshots": [
+    "01-home.png",
+    "02-language-selection.png",
+    "03-turn-hop-1.png",
+    "04-received-hop-1.png",
+    "05-result-chain-1.png",
+    "06-gallery-after-chain-1.png",
+    "07-map-after-chain-1.png",
+    "08-public-chain-1.png",
+    "09-moderation-report-submitted.png",
+    "10-invite-active-chain.png",
+    "11-invite-confirmation.png",
+    "12-invite-turn-hop-2.png",
+    "13-invite-received-hop-2.png",
+    "14-public-chain-2-final.png",
+    "15-gallery-final.png",
+    "16-map-stats-final.png",
+    "17-map-all-time-final.png",
+    "18-locale-english-final.png",
+    "19-cancel-turn-final.png",
+    "20-cancelled-home-final.png",
+    "21-invalid-chain-error.png",
+    "24-cancel-reload-fixed.png"
+  ]
+}

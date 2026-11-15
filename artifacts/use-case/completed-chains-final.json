@@ -1,0 +1,59 @@
+{
+  "results": [
+    {
+      "language": "ru",
+      "code": "AyS2i4yHGJ",
+      "hops": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "language": "en",
+      "code": "cRWU1jjisn",
+      "hops": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "stats": {
+    "active_chains": 0,
+    "completed_chains": 2,
+    "saved_messages": 24,
+    "total_participants": 24,
+    "updated_at": "2026-11-15T14:52:37.018Z"
+  },
+  "galleryCount": 2,
+  "mapTotal": 24,
+  "mapCountries": [
+    {
+      "country_code": "RU",
+      "count": 12
+    },
+    {
+      "country_code": "US",
+      "count": 12
+    }
+  ]
+}

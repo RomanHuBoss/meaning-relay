@@ -1,0 +1,54 @@
+{
+  "name": "meaning-relay",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Meaning Relay — смысловой телефон",
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.1"
+    }
+  },
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "migrate": "node scripts/migrate.mjs",
+    "seed": "node scripts/seed.mjs",
+    "generate:phrases": "node scripts/generate-starter-phrases.mjs",
+    "seed:phrases": "node scripts/seed-starter-phrases.mjs",
+    "audit:responsive": "node scripts/audit-responsive.mjs",
+    "verify:readiness": "node scripts/verify-readiness.mjs",
+    "verify:production": "node scripts/verify-production.mjs",
+    "verify:documentation": "node scripts/verify-documentation.mjs",
+    "maintenance": "node scripts/maintenance.mjs",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:postgres": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "pg": "8.16.3",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@next/eslint-plugin-next": "16.4.6",
+    "@playwright/test": "1.55.1",
+    "@types/node": "22.15.30",
+    "@types/pg": "8.15.5",
+    "@types/react": "19.1.10",
+    "@types/react-dom": "19.1.7",
+    "@typescript-eslint/parser": "8.72.2",
+    "eslint": "9.38.0",
+    "eslint-config-next": "16.4.6",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0"
+  }
+}

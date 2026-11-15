@@ -1,0 +1,1172 @@
+[
+  {
+    "size": "320x800",
+    "route": "/",
+    "url": "http://127.0.0.1:3200/",
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "scrollWidth": 320,
+    "scrollHeight": 3480,
+    "bodyScrollWidth": 372,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 107.67593383789062,
+          "y": 19.01736068725586,
+          "width": 255.45486450195312,
+          "height": 195.027099609375,
+          "top": 19.01736068725586,
+          "right": 363.13079833984375,
+          "bottom": 214.04446029663086,
+          "left": 107.67593383789062
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -48,
+          "y": 870.40625,
+          "width": 153.59375,
+          "height": 153.59375,
+          "top": 870.40625,
+          "right": 105.59375,
+          "bottom": 1024,
+          "left": -48
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "locale-picker",
+        "r": {
+          "x": 18.546875,
+          "y": 57.390625,
+          "width": 346.21875,
+          "height": 32,
+          "top": 57.390625,
+          "right": 364.765625,
+          "bottom": 89.390625,
+          "left": 18.546875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "r": {
+          "x": 309.5625,
+          "y": 57.390625,
+          "width": 55.203125,
+          "height": 32,
+          "top": 57.390625,
+          "right": 364.765625,
+          "bottom": 89.390625,
+          "left": 309.5625
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "locale-flag locale-flag-hi",
+        "r": {
+          "x": 316.5625,
+          "y": 65.890625,
+          "width": 22,
+          "height": 15,
+          "top": 65.890625,
+          "right": 338.5625,
+          "bottom": 80.890625,
+          "left": 316.5625
+        }
+      },
+      {
+        "tag": "SMALL",
+        "cls": "",
+        "r": {
+          "x": 344.5625,
+          "y": 67.890625,
+          "width": 13.203125,
+          "height": 11,
+          "top": 67.890625,
+          "right": 357.765625,
+          "bottom": 78.890625,
+          "left": 344.5625
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "320x800",
+    "route": "/?join=1",
+    "url": "http://127.0.0.1:3200/?join=1",
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "scrollWidth": 320,
+    "scrollHeight": 2051,
+    "bodyScrollWidth": 372,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 107.67438507080078,
+          "y": 19.0191707611084,
+          "width": 255.44943237304688,
+          "height": 195.0272216796875,
+          "top": 19.0191707611084,
+          "right": 363.12381744384766,
+          "bottom": 214.0463924407959,
+          "left": 107.67438507080078
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -48,
+          "y": 870.40625,
+          "width": 153.59375,
+          "height": 153.59375,
+          "top": 870.40625,
+          "right": 105.59375,
+          "bottom": 1024,
+          "left": -48
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "locale-picker",
+        "r": {
+          "x": 18.546875,
+          "y": 57.390625,
+          "width": 352.875,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 18.546875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "r": {
+          "x": 315.109375,
+          "y": 57.390625,
+          "width": 56.3125,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 315.109375
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "locale-flag locale-flag-hi",
+        "r": {
+          "x": 322.109375,
+          "y": 65.890625,
+          "width": 22,
+          "height": 15,
+          "top": 65.890625,
+          "right": 344.109375,
+          "bottom": 80.890625,
+          "left": 322.109375
+        }
+      },
+      {
+        "tag": "SMALL",
+        "cls": "",
+        "r": {
+          "x": 350.109375,
+          "y": 67.890625,
+          "width": 14.3125,
+          "height": 11,
+          "top": 67.890625,
+          "right": 364.421875,
+          "bottom": 78.890625,
+          "left": 350.109375
+        }
+      }
+    ],
+    "focusables": 16
+  },
+  {
+    "size": "320x800",
+    "route": "/chains",
+    "url": "http://127.0.0.1:3200/chains",
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "scrollWidth": 320,
+    "scrollHeight": 1391,
+    "bodyScrollWidth": 372,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 107.67439270019531,
+          "y": 19.01917266845703,
+          "width": 255.4494171142578,
+          "height": 195.0272216796875,
+          "top": 19.01917266845703,
+          "right": 363.1238098144531,
+          "bottom": 214.04639434814453,
+          "left": 107.67439270019531
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -48,
+          "y": 870.40625,
+          "width": 153.59375,
+          "height": 153.59375,
+          "top": 870.40625,
+          "right": 105.59375,
+          "bottom": 1024,
+          "left": -48
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "locale-picker",
+        "r": {
+          "x": 18.546875,
+          "y": 57.390625,
+          "width": 352.875,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 18.546875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "r": {
+          "x": 315.109375,
+          "y": 57.390625,
+          "width": 56.3125,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 315.109375
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "locale-flag locale-flag-hi",
+        "r": {
+          "x": 322.109375,
+          "y": 65.890625,
+          "width": 22,
+          "height": 15,
+          "top": 65.890625,
+          "right": 344.109375,
+          "bottom": 80.890625,
+          "left": 322.109375
+        }
+      },
+      {
+        "tag": "SMALL",
+        "cls": "",
+        "r": {
+          "x": 350.109375,
+          "y": 67.890625,
+          "width": 14.3125,
+          "height": 11,
+          "top": 67.890625,
+          "right": 364.421875,
+          "bottom": 78.890625,
+          "left": 350.109375
+        }
+      }
+    ],
+    "focusables": 12
+  },
+  {
+    "size": "320x800",
+    "route": "/map",
+    "url": "http://127.0.0.1:3200/map",
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "scrollWidth": 320,
+    "scrollHeight": 3021,
+    "bodyScrollWidth": 372,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 107.67525482177734,
+          "y": 19.018173217773438,
+          "width": 255.45242309570312,
+          "height": 195.0271453857422,
+          "top": 19.018173217773438,
+          "right": 363.12767791748047,
+          "bottom": 214.04531860351562,
+          "left": 107.67525482177734
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -48,
+          "y": 870.40625,
+          "width": 153.59375,
+          "height": 153.59375,
+          "top": 870.40625,
+          "right": 105.59375,
+          "bottom": 1024,
+          "left": -48
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "locale-picker",
+        "r": {
+          "x": 18.546875,
+          "y": 57.390625,
+          "width": 352.875,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 18.546875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "r": {
+          "x": 315.109375,
+          "y": 57.390625,
+          "width": 56.3125,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 315.109375
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "locale-flag locale-flag-hi",
+        "r": {
+          "x": 322.109375,
+          "y": 65.890625,
+          "width": 22,
+          "height": 15,
+          "top": 65.890625,
+          "right": 344.109375,
+          "bottom": 80.890625,
+          "left": 322.109375
+        }
+      },
+      {
+        "tag": "SMALL",
+        "cls": "",
+        "r": {
+          "x": 350.109375,
+          "y": 67.890625,
+          "width": 14.3125,
+          "height": 11,
+          "top": 67.890625,
+          "right": 364.421875,
+          "bottom": 78.890625,
+          "left": 350.109375
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "map-point map-point-JP",
+        "r": {
+          "x": 249.875,
+          "y": 886.734375,
+          "width": 72,
+          "height": 27,
+          "top": 886.734375,
+          "right": 321.875,
+          "bottom": 913.734375,
+          "left": 249.875
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "ranking-row",
+        "r": {
+          "x": 49.546875,
+          "y": 1602.53125,
+          "width": 272,
+          "height": 35,
+          "top": 1602.53125,
+          "right": 321.546875,
+          "bottom": 1637.53125,
+          "left": 49.546875
+        }
+      },
+      {
+        "tag": "STRONG",
+        "cls": "",
+        "r": {
+          "x": 283.546875,
+          "y": 1613.03125,
+          "width": 38,
+          "height": 14,
+          "top": 1613.03125,
+          "right": 321.546875,
+          "bottom": 1627.03125,
+          "left": 283.546875
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "ranking-row",
+        "r": {
+          "x": 49.546875,
+          "y": 1655.53125,
+          "width": 272,
+          "height": 35,
+          "top": 1655.53125,
+          "right": 321.546875,
+          "bottom": 1690.53125,
+          "left": 49.546875
+        }
+      },
+      {
+        "tag": "STRONG",
+        "cls": "",
+        "r": {
+          "x": 283.546875,
+          "y": 1666.03125,
+          "width": 38,
+          "height": 14,
+          "top": 1666.03125,
+          "right": 321.546875,
+          "bottom": 1680.03125,
+          "left": 283.546875
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "320x800",
+    "route": "/about",
+    "url": "http://127.0.0.1:3200/about",
+    "innerWidth": 320,
+    "innerHeight": 800,
+    "scrollWidth": 320,
+    "scrollHeight": 3729,
+    "bodyScrollWidth": 372,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 107.67286682128906,
+          "y": 19.02096176147461,
+          "width": 255.4440460205078,
+          "height": 195.0272979736328,
+          "top": 19.02096176147461,
+          "right": 363.1169128417969,
+          "bottom": 214.04825973510742,
+          "left": 107.67286682128906
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -48,
+          "y": 870.40625,
+          "width": 153.59375,
+          "height": 153.59375,
+          "top": 870.40625,
+          "right": 105.59375,
+          "bottom": 1024,
+          "left": -48
+        }
+      },
+      {
+        "tag": "DIV",
+        "cls": "locale-picker",
+        "r": {
+          "x": 18.546875,
+          "y": 57.390625,
+          "width": 352.875,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 18.546875
+        }
+      },
+      {
+        "tag": "BUTTON",
+        "cls": "",
+        "r": {
+          "x": 315.109375,
+          "y": 57.390625,
+          "width": 56.3125,
+          "height": 32,
+          "top": 57.390625,
+          "right": 371.421875,
+          "bottom": 89.390625,
+          "left": 315.109375
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "locale-flag locale-flag-hi",
+        "r": {
+          "x": 322.109375,
+          "y": 65.890625,
+          "width": 22,
+          "height": 15,
+          "top": 65.890625,
+          "right": 344.109375,
+          "bottom": 80.890625,
+          "left": 322.109375
+        }
+      },
+      {
+        "tag": "SMALL",
+        "cls": "",
+        "r": {
+          "x": 350.109375,
+          "y": 67.890625,
+          "width": 14.3125,
+          "height": 11,
+          "top": 67.890625,
+          "right": 364.421875,
+          "bottom": 78.890625,
+          "left": 350.109375
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "375x812",
+    "route": "/",
+    "url": "http://127.0.0.1:3200/",
+    "innerWidth": 375,
+    "innerHeight": 812,
+    "scrollWidth": 375,
+    "scrollHeight": 3511,
+    "bodyScrollWidth": 426,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 126.18489074707031,
+          "y": 14.75354290008545,
+          "width": 299.37469482421875,
+          "height": 228.5609588623047,
+          "top": 14.75354290008545,
+          "right": 425.55958557128906,
+          "bottom": 243.31450176239014,
+          "left": 126.18489074707031
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -56.25,
+          "y": 859.359375,
+          "width": 180,
+          "height": 180,
+          "top": 859.359375,
+          "right": 123.75,
+          "bottom": 1039.359375,
+          "left": -56.25
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "375x812",
+    "route": "/?join=1",
+    "url": "http://127.0.0.1:3200/?join=1",
+    "innerWidth": 375,
+    "innerHeight": 812,
+    "scrollWidth": 375,
+    "scrollHeight": 2024,
+    "bodyScrollWidth": 426,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 126.1828384399414,
+          "y": 14.755946159362793,
+          "width": 299.3675231933594,
+          "height": 228.5610809326172,
+          "top": 14.755946159362793,
+          "right": 425.5503616333008,
+          "bottom": 243.31702709197998,
+          "left": 126.1828384399414
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -56.25,
+          "y": 859.359375,
+          "width": 180,
+          "height": 180,
+          "top": 859.359375,
+          "right": 123.75,
+          "bottom": 1039.359375,
+          "left": -56.25
+        }
+      }
+    ],
+    "focusables": 16
+  },
+  {
+    "size": "375x812",
+    "route": "/chains",
+    "url": "http://127.0.0.1:3200/chains",
+    "innerWidth": 375,
+    "innerHeight": 812,
+    "scrollWidth": 375,
+    "scrollHeight": 1317,
+    "bodyScrollWidth": 426,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 126.18460845947266,
+          "y": 14.753860473632812,
+          "width": 299.373779296875,
+          "height": 228.56097412109375,
+          "top": 14.753860473632812,
+          "right": 425.55838775634766,
+          "bottom": 243.31483459472656,
+          "left": 126.18460845947266
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -56.25,
+          "y": 859.359375,
+          "width": 180,
+          "height": 180,
+          "top": 859.359375,
+          "right": 123.75,
+          "bottom": 1039.359375,
+          "left": -56.25
+        }
+      }
+    ],
+    "focusables": 12
+  },
+  {
+    "size": "375x812",
+    "route": "/map",
+    "url": "http://127.0.0.1:3200/map",
+    "innerWidth": 375,
+    "innerHeight": 812,
+    "scrollWidth": 375,
+    "scrollHeight": 2931,
+    "bodyScrollWidth": 426,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 126.18460845947266,
+          "y": 14.753860473632812,
+          "width": 299.373779296875,
+          "height": 228.56097412109375,
+          "top": 14.753860473632812,
+          "right": 425.55838775634766,
+          "bottom": 243.31483459472656,
+          "left": 126.18460845947266
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -56.25,
+          "y": 859.359375,
+          "width": 180,
+          "height": 180,
+          "top": 859.359375,
+          "right": 123.75,
+          "bottom": 1039.359375,
+          "left": -56.25
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "375x812",
+    "route": "/about",
+    "url": "http://127.0.0.1:3200/about",
+    "innerWidth": 375,
+    "innerHeight": 812,
+    "scrollWidth": 375,
+    "scrollHeight": 3250,
+    "bodyScrollWidth": 426,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 126.18214416503906,
+          "y": 14.756753921508789,
+          "width": 299.3651123046875,
+          "height": 228.56112670898438,
+          "top": 14.756753921508789,
+          "right": 425.54725646972656,
+          "bottom": 243.31788063049316,
+          "left": 126.18214416503906
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -56.25,
+          "y": 859.359375,
+          "width": 180,
+          "height": 180,
+          "top": 859.359375,
+          "right": 123.75,
+          "bottom": 1039.359375,
+          "left": -56.25
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "390x844",
+    "route": "/",
+    "url": "http://127.0.0.1:3200/",
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 3547,
+    "bodyScrollWidth": 441,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 131.22645568847656,
+          "y": 15.301513671875,
+          "width": 311.3458251953125,
+          "height": 237.6995391845703,
+          "top": 15.301513671875,
+          "right": 442.57228088378906,
+          "bottom": 253.0010528564453,
+          "left": 131.22645568847656
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -58.5,
+          "y": 893.125,
+          "width": 187.1875,
+          "height": 187.1875,
+          "top": 893.125,
+          "right": 128.6875,
+          "bottom": 1080.3125,
+          "left": -58.5
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "390x844",
+    "route": "/?join=1",
+    "url": "http://127.0.0.1:3200/?join=1",
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2010,
+    "bodyScrollWidth": 441,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 131.2259063720703,
+          "y": 15.30217170715332,
+          "width": 311.3438720703125,
+          "height": 237.6995849609375,
+          "top": 15.30217170715332,
+          "right": 442.5697784423828,
+          "bottom": 253.00175666809082,
+          "left": 131.2259063720703
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -58.5,
+          "y": 893.125,
+          "width": 187.1875,
+          "height": 187.1875,
+          "top": 893.125,
+          "right": 128.6875,
+          "bottom": 1080.3125,
+          "left": -58.5
+        }
+      }
+    ],
+    "focusables": 16
+  },
+  {
+    "size": "390x844",
+    "route": "/chains",
+    "url": "http://127.0.0.1:3200/chains",
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 1317,
+    "bodyScrollWidth": 441,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 131.22509765625,
+          "y": 15.303123474121094,
+          "width": 311.3410339355469,
+          "height": 237.69964599609375,
+          "top": 15.303123474121094,
+          "right": 442.5661315917969,
+          "bottom": 253.00276947021484,
+          "left": 131.22509765625
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -58.5,
+          "y": 893.125,
+          "width": 187.1875,
+          "height": 187.1875,
+          "top": 893.125,
+          "right": 128.6875,
+          "bottom": 1080.3125,
+          "left": -58.5
+        }
+      }
+    ],
+    "focusables": 12
+  },
+  {
+    "size": "390x844",
+    "route": "/map",
+    "url": "http://127.0.0.1:3200/map",
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 2874,
+    "bodyScrollWidth": 441,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 131.22457885742188,
+          "y": 15.303725242614746,
+          "width": 311.3392333984375,
+          "height": 237.6996612548828,
+          "top": 15.303725242614746,
+          "right": 442.5638122558594,
+          "bottom": 253.00338649749756,
+          "left": 131.22457885742188
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -58.5,
+          "y": 893.125,
+          "width": 187.1875,
+          "height": 187.1875,
+          "top": 893.125,
+          "right": 128.6875,
+          "bottom": 1080.3125,
+          "left": -58.5
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "390x844",
+    "route": "/about",
+    "url": "http://127.0.0.1:3200/about",
+    "innerWidth": 390,
+    "innerHeight": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 3109,
+    "bodyScrollWidth": 441,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 131.22315979003906,
+          "y": 15.305400848388672,
+          "width": 311.334228515625,
+          "height": 237.69973754882812,
+          "top": 15.305400848388672,
+          "right": 442.55738830566406,
+          "bottom": 253.0051383972168,
+          "left": 131.22315979003906
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -58.5,
+          "y": 893.125,
+          "width": 187.1875,
+          "height": 187.1875,
+          "top": 893.125,
+          "right": 128.6875,
+          "bottom": 1080.3125,
+          "left": -58.5
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "412x915",
+    "route": "/",
+    "url": "http://127.0.0.1:3200/",
+    "innerWidth": 412,
+    "innerHeight": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 3598,
+    "bodyScrollWidth": 462,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 138.64285278320312,
+          "y": 17.577102661132812,
+          "width": 328.893310546875,
+          "height": 251.0996856689453,
+          "top": 17.577102661132812,
+          "right": 467.5361633300781,
+          "bottom": 268.6767883300781,
+          "left": 138.64285278320312
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -61.796875,
+          "y": 973.4375,
+          "width": 197.75,
+          "height": 197.75,
+          "top": 973.4375,
+          "right": 135.953125,
+          "bottom": 1171.1875,
+          "left": -61.796875
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "412x915",
+    "route": "/?join=1",
+    "url": "http://127.0.0.1:3200/?join=1",
+    "innerWidth": 412,
+    "innerHeight": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 2018,
+    "bodyScrollWidth": 462,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 138.6412353515625,
+          "y": 17.579017639160156,
+          "width": 328.8875427246094,
+          "height": 251.09976196289062,
+          "top": 17.579017639160156,
+          "right": 467.5287780761719,
+          "bottom": 268.6787796020508,
+          "left": 138.6412353515625
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -61.796875,
+          "y": 973.4375,
+          "width": 197.75,
+          "height": 197.75,
+          "top": 973.4375,
+          "right": 135.953125,
+          "bottom": 1171.1875,
+          "left": -61.796875
+        }
+      }
+    ],
+    "focusables": 16
+  },
+  {
+    "size": "412x915",
+    "route": "/chains",
+    "url": "http://127.0.0.1:3200/chains",
+    "innerWidth": 412,
+    "innerHeight": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 1293,
+    "bodyScrollWidth": 462,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 138.64048767089844,
+          "y": 17.57988739013672,
+          "width": 328.88494873046875,
+          "height": 251.09982299804688,
+          "top": 17.57988739013672,
+          "right": 467.5254364013672,
+          "bottom": 268.6797103881836,
+          "left": 138.64048767089844
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -61.796875,
+          "y": 973.4375,
+          "width": 197.75,
+          "height": 197.75,
+          "top": 973.4375,
+          "right": 135.953125,
+          "bottom": 1171.1875,
+          "left": -61.796875
+        }
+      }
+    ],
+    "focusables": 12
+  },
+  {
+    "size": "412x915",
+    "route": "/map",
+    "url": "http://127.0.0.1:3200/map",
+    "innerWidth": 412,
+    "innerHeight": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 2779,
+    "bodyScrollWidth": 462,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 138.64285278320312,
+          "y": 17.577102661132812,
+          "width": 328.893310546875,
+          "height": 251.0996856689453,
+          "top": 17.577102661132812,
+          "right": 467.5361633300781,
+          "bottom": 268.6767883300781,
+          "left": 138.64285278320312
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -61.796875,
+          "y": 973.4375,
+          "width": 197.75,
+          "height": 197.75,
+          "top": 973.4375,
+          "right": 135.953125,
+          "bottom": 1171.1875,
+          "left": -61.796875
+        }
+      }
+    ],
+    "focusables": 10
+  },
+  {
+    "size": "412x915",
+    "route": "/about",
+    "url": "http://127.0.0.1:3200/about",
+    "innerWidth": 412,
+    "innerHeight": 915,
+    "scrollWidth": 412,
+    "scrollHeight": 3034,
+    "bodyScrollWidth": 462,
+    "overflows": [
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__nebula",
+        "r": {
+          "x": 138.6393585205078,
+          "y": 17.581220626831055,
+          "width": 328.88092041015625,
+          "height": 251.0998992919922,
+          "top": 17.581220626831055,
+          "right": 467.52027893066406,
+          "bottom": 268.68111991882324,
+          "left": 138.6393585205078
+        }
+      },
+      {
+        "tag": "SPAN",
+        "cls": "galaxy-backdrop__halo",
+        "r": {
+          "x": -61.796875,
+          "y": 973.4375,
+          "width": 197.75,
+          "height": 197.75,
+          "top": 973.4375,
+          "right": 135.953125,
+          "bottom": 1171.1875,
+          "left": -61.796875
+        }
+      }
+    ],
+    "focusables": 10
+  }
+]

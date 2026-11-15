@@ -1,0 +1,34 @@
+{
+  "cancel": {
+    "startStatus": 201,
+    "cancelStatus": 204,
+    "submitAfterCancelStatus": 409,
+    "submitAfterCancel": {
+      "error": {
+        "code": "CLAIM_CANCELLED",
+        "message": "CLAIM_CANCELLED",
+        "request_id": "d86e2aea-f9af-42a5-9676-01933ad2d965",
+        "retry_after_seconds": 0
+      }
+    }
+  },
+  "recover": {
+    "status": 200,
+    "replayStatus": 200,
+    "sameClaim": true,
+    "sameToken": true
+  },
+  "report": {
+    "publicStatus": 200,
+    "messageId": true,
+    "report": {
+      "status": 201,
+      "body": {
+        "report": {
+          "id": "a7aaaf3e-82c3-4500-8f18-5973a9620b18",
+          "status": "OPEN"
+        }
+      }
+    }
+  }
+}
