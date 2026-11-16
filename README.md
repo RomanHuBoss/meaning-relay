@@ -126,6 +126,11 @@ PostgreSQL 16, приложение Next.js в standalone-режиме и отд
    приложения. База данных остаётся во внутренней сети Compose и хранится в
    volume `meaning-relay-db`.
 
+Для VPS с ISPmanager используйте `deploy/compose-ispmanager.sh` от root и
+установите `deploy/meaning-relay-compose.service` в systemd. Docker уже должен
+быть включён через `systemctl enable --now docker`. Политика `unless-stopped`
+перезапускает базу, приложение и maintenance после перезагрузки или сбоя.
+
 Compose повторно применяет идемпотентную миграцию, базовый seed и пул стартовых
 фраз при старте приложения.
 Перед обновлением VPS сохраните резервную копию volume PostgreSQL.
