@@ -53,9 +53,15 @@ test("session, CSRF, submit and invite continuation use the real HTTP flow", asy
   const startBody = await start.json() as { chain: { public_code: string }; claim: { id: string; claim_token: string } };
   expect(startBody.claim.claim_token).toBeTruthy();
 
+  const captchaResponse = await request.get(`/api/v1/captcha?claim_id=${startBody.claim.id}&locale=ru`);
+  expect(captchaResponse.status()).toBe(200);
+  const captchaBody = await captchaResponse.json() as { token: string; prompt: string };
+  const operands = captchaBody.prompt.match(/(\d+)\s*\+\s*(\d+)/u);
+  expect(operands).toBeTruthy();
+
   const submit = await request.post(`/api/v1/claims/${startBody.claim.id}/submit`, {
     headers: { "X-CSRF-Token": csrf },
-    data: { claim_token: startBody.claim.claim_token, idempotency_key: randomUUID(), text: validText, country_code: null },
+    data: { claim_token: startBody.claim.claim_token, idempotency_key: randomUUID(), text: validText, country_code: null, captcha_token: captchaBody.token, captcha_answer: String(Number(operands?.[1]) + Number(operands?.[2])) },
   });
   expect(submit.status()).toBe(201);
   expect((await submit.json()).message.hop_index).toBe(1);

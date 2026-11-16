@@ -2,6 +2,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { RelayError } from "../../packages/shared/types/relay";
+import { issueCaptcha } from "../../lib/http/captcha";
 
 const fakeRuntime = vi.hoisted(() => ({
   start: vi.fn(),
@@ -17,6 +18,12 @@ const csrf = "c".repeat(43);
 const session = "s".repeat(43);
 const startKey = "00000000-0000-4000-8000-000000000000";
 const submitKey = "11111111-1111-4111-8111-111111111111";
+
+function captchaFields(claimId = "claim"): { captcha_token: string; captcha_answer: string } {
+  const issued = issueCaptcha(claimId, "ru");
+  const payload = JSON.parse(Buffer.from(issued.token.split(".")[0], "base64url").toString("utf8")) as { a: number; b: number };
+  return { captcha_token: issued.token, captcha_answer: String(payload.a + payload.b) };
+}
 
 function request(
   url: string,
@@ -103,7 +110,7 @@ describe("start and submit input contracts", () => {
     const response = await submitPost(
       request(
         "http://localhost/api/v1/claims/claim/submit",
-        JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "valid text", country_code: null }),
+        JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "valid text", country_code: null, ...captchaFields() }),
         { session: false },
       ),
       { params: Promise.resolve({ claimId: "claim" }) },
@@ -127,7 +134,7 @@ describe("start and submit input contracts", () => {
     const response = await submitPost(
       request(
         "http://localhost/api/v1/claims/claim/submit",
-        JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "valid text", country_code: "ZZ" }),
+        JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "valid text", country_code: "ZZ", ...captchaFields() }),
       ),
       { params: Promise.resolve({ claimId: "claim" }) },
     );

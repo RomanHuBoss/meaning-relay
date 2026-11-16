@@ -864,6 +864,9 @@ body { background: #070d14; }
   background-size: cover;
   background-position: center;
   background-blend-mode: normal, screen;
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .galaxy-backdrop::before {
@@ -980,10 +983,23 @@ body { background: #070d14; }
   background: transparent;
 }
 
-/* The fixed nebula remains the page artwork. Keep the canvas color underneath it
-   so first paint and delayed image decoding never expose a black/transparent band. */
+/* Фиксированная туманность остаётся фоном страницы. Цвет холста под ней
+   убирает чёрную полосу до декодирования изображения и при прокрутке. */
 body:has(.map-page) { background: var(--color-bg-canvas); }
 body:has(.map-page) .galaxy-backdrop { opacity: 1; }
+/* Запасной слой заполняет документ, пока фиксированный фон ещё обновляет композитный кадр. */
+body:has(.map-page)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(180deg, rgba(4, 10, 18, .52), rgba(4, 10, 18, .78)),
+    url("/galaxy-nebula.png");
+  background-size: cover;
+  background-position: center top;
+}
 
 .map-page::before,
 .map-page::after { opacity: 0.08; }
@@ -2052,6 +2068,58 @@ main.site-shell .reply-footer {
   align-items: center;
   gap: 14px;
 }
+main.site-shell .captcha-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0 2px;
+  padding: 12px 14px;
+  border: 1px solid rgba(140, 226, 231, .2);
+  border-radius: 12px;
+  background: rgba(7, 18, 29, .42);
+  box-shadow: inset 0 1px 0 rgba(240, 255, 250, .08);
+}
+main.site-shell .captcha-field > div {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+main.site-shell .captcha-label {
+  color: var(--color-brand-lime);
+  font: 10px/1 var(--font-mono, "IBM Plex Mono", monospace);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+main.site-shell .captcha-prompt {
+  color: rgba(239, 244, 232, .82);
+  font-size: 14px;
+}
+main.site-shell .captcha-field input {
+  width: 92px;
+  min-height: 40px;
+  margin-left: auto;
+  padding: 8px 10px;
+  border: 1px solid rgba(140, 226, 231, .3);
+  border-radius: 8px;
+  background: rgba(3, 11, 20, .54);
+  color: var(--ink);
+  font: 600 16px/1 var(--font-mono, "IBM Plex Mono", monospace);
+  text-align: center;
+}
+main.site-shell .captcha-field input:focus { border-color: var(--color-brand-lime); outline: none; box-shadow: 0 0 0 3px rgba(200, 255, 49, .12); }
+main.site-shell .captcha-refresh {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid rgba(140, 226, 231, .25);
+  border-radius: 8px;
+  background: transparent;
+  color: rgba(239, 244, 232, .74);
+  cursor: pointer;
+  font-size: 20px;
+}
+main.site-shell .captcha-refresh:hover,
+main.site-shell .captcha-refresh:focus-visible { border-color: var(--color-brand-lime); color: var(--color-brand-lime); }
 main.site-shell .reply-footer .primary-button {
   min-height: 48px;
   padding: 14px 24px;
@@ -2173,6 +2241,9 @@ main.site-shell .country-signal-us { background: repeating-linear-gradient(#bf45
     flex: 1;
     width: auto;
   }
+  main.site-shell .captcha-field { align-items: stretch; flex-wrap: wrap; }
+  main.site-shell .captcha-field > div { flex: 1 1 100%; }
+  main.site-shell .captcha-field input { margin-left: 0; flex: 1; width: auto; }
 }
 
 /* Основная навигация остаётся доступной на мобильных экранах, но собирается

@@ -13,7 +13,7 @@ describe("итерация 41: состояния пользовательско
   });
 
   it("блокирует отправку после истечения серверного таймера", () => {
-    expect(source).toMatch(/disabled=\{submitting \|\| seconds <= 0 \|\| counter < 20\}/u);
+    expect(source).toMatch(/disabled=\{submitting \|\| seconds <= 0 \|\| counter < 20 \|\| !captcha \|\| !captchaAnswer\.trim\(\)\}/u);
     expect(source).toMatch(/seconds <= 0 \? "Время вышло"/u);
   });
 

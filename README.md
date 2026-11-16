@@ -13,7 +13,7 @@
 - PostgreSQL-миграцию с основными таблицами и частичными уникальными индексами;
 - PostgreSQL-адаптер relay с транзакционными lock/retry-путями;
 - Next.js-приложение с пользовательским relay flow и persistence draft/claim;
-- HTTP-контракт для session, CSRF, participation/start, claim submit/cancel и
+- HTTP-контракт для session, CSRF, participation/start, server captcha, claim submit/cancel и
   публичного состояния цепочки;
 - health endpoint, maintenance job и локальный HTTP smoke-сценарий;
 - публичные страницы галереи, карты и правил;
@@ -59,14 +59,17 @@ In-memory реализация используется только как ло
 - GET /api/v1/csrf;
 - POST /api/v1/session;
 - POST /api/v1/participation/start;
+- GET /api/v1/captcha?claim_id={claim_id}&locale={locale};
 - POST /api/v1/claims/{claim_id}/submit;
 - POST /api/v1/claims/{claim_id}/cancel;
 - GET /api/v1/chains/{public_code}.
 - GET /chains/{public_code} и GET /c/{public_code} для публичной цепочки и invite flow.
 
 Мутирующие запросы требуют заголовок x-csrf-token и cookie, полученные через
-CSRF/session endpoints. До подключения PostgreSQL состояние relay хранится
-только в памяти процесса разработки.
+CSRF/session endpoints. Перед submit интерфейс получает короткую подписанную
+арифметическую проверку через captcha endpoint, а ответ проверяется сервером.
+До подключения PostgreSQL состояние relay хранится только в памяти процесса
+разработки.
 
 ## PostgreSQL режим
 

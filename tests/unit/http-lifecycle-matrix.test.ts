@@ -3,6 +3,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest, NextResponse } from "next/server";
 import { RelayError } from "../../packages/shared/types/relay";
+import { issueCaptcha } from "../../lib/http/captcha";
 
 const fakeRuntime = vi.hoisted(() => ({
   start: vi.fn(),
@@ -32,6 +33,12 @@ const submitKey = "11111111-1111-4111-8111-111111111111";
 const recoverKey = "22222222-2222-4222-8222-222222222222";
 const limited = { allowed: false, retryAfterSeconds: 17, limit: 5, remaining: 0 };
 const allowed = { allowed: true, retryAfterSeconds: 0, limit: 20, remaining: 19 };
+
+function captchaFields(claimId = "claim"): { captcha_token: string; captcha_answer: string } {
+  const issued = issueCaptcha(claimId, "ru");
+  const payload = JSON.parse(Buffer.from(issued.token.split(".")[0], "base64url").toString("utf8")) as { a: number; b: number };
+  return { captcha_token: issued.token, captcha_answer: String(payload.a + payload.b) };
+}
 
 function request(url: string, body: string, options: { session?: boolean; csrfHeader?: string } = {}): NextRequest {
   const headers = new Headers({ "content-type": "application/json" });
@@ -94,7 +101,7 @@ describe("матрица защиты HTTP-жизненного цикла", () 
 
   it("применяет ограничение отправки до обращения к relay", async () => {
     fakeRate.consumeRateLimit.mockResolvedValue(limited);
-    const response = await submitPost(newSessionRequest("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null })), { params: Promise.resolve({ claimId: "claim" }) });
+    const response = await submitPost(newSessionRequest("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null, ...captchaFields() })), { params: Promise.resolve({ claimId: "claim" }) });
 
     expect(response.status).toBe(429);
     expect(response.headers.get("Retry-After")).toBe("17");
@@ -115,9 +122,9 @@ describe("матрица защиты HTTP-жизненного цикла", () 
 
   it("maps submit token and owner failures without exposing runtime details", async () => {
     fakeRuntime.submit.mockRejectedValueOnce(new RelayError("CLAIM_TOKEN_INVALID"));
-    const invalidToken = await submitPost(request("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "wrong", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null })), { params: Promise.resolve({ claimId: "claim" }) });
+    const invalidToken = await submitPost(request("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "wrong", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null, ...captchaFields() })), { params: Promise.resolve({ claimId: "claim" }) });
     fakeRuntime.submit.mockRejectedValueOnce(new RelayError("CLAIM_OWNER_REQUIRED"));
-    const wrongOwner = await submitPost(request("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null })), { params: Promise.resolve({ claimId: "claim" }) });
+    const wrongOwner = await submitPost(request("http://localhost/api/v1/claims/claim/submit", JSON.stringify({ claim_token: "token", idempotency_key: submitKey, text: "Достаточно длинный текст для проверки", country_code: null, ...captchaFields() })), { params: Promise.resolve({ claimId: "claim" }) });
 
     expect(invalidToken.status).toBe(403);
     expect(wrongOwner.status).toBe(403);

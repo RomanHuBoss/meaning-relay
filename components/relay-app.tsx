@@ -125,6 +125,15 @@ const languageStepLabels: Record<UiLocale, { action: string; rules: string; acce
   hi: { action: "अगला चरण लें ↗", rules: "नियम फिर देखें", accept: "जारी रखकर आप प्रयोग के नियम स्वीकार करते हैं" },
 };
 
+const captchaCopy: Record<UiLocale, { label: string; placeholder: string; refresh: string; invalid: string }> = {
+  ru: { label: "Проверка от спама", placeholder: "Ответ", refresh: "Новая проверка", invalid: "Проверьте ответ и попробуйте снова" },
+  en: { label: "Spam check", placeholder: "Answer", refresh: "New check", invalid: "Check the answer and try again" },
+  es: { label: "Comprobación antispam", placeholder: "Respuesta", refresh: "Nueva comprobación", invalid: "Comprueba la respuesta e inténtalo de nuevo" },
+  zh: { label: "反垃圾验证", placeholder: "答案", refresh: "换一道题", invalid: "请检查答案后重试" },
+  fr: { label: "Vérification anti-spam", placeholder: "Réponse", refresh: "Nouvelle question", invalid: "Vérifiez la réponse puis réessayez" },
+  hi: { label: "स्पैम जाँच", placeholder: "उत्तर", refresh: "नई जाँच", invalid: "उत्तर जाँचकर फिर कोशिश करें" },
+};
+
 const fragmentNodePositions = [
   ["10.6%", "56.9%"], ["19.1%", "56.9%"], ["28.8%", "59.7%"], ["38.4%", "56.9%"],
   ["48.6%", "57.7%"], ["58.2%", "61.6%"], ["67.9%", "65.6%"], ["74.8%", "73%"],
@@ -206,6 +215,10 @@ export function RelayApp() {
   const [joinCode, setJoinCode] = useState("");
   const [joinLanguage, setJoinLanguage] = useState<Language>("ru");
   const [inviteNotice, setInviteNotice] = useState("");
+  const [captcha, setCaptcha] = useState<{ token: string; prompt: string } | null>(null);
+  const [captchaAnswer, setCaptchaAnswer] = useState("");
+  const [captchaLoading, setCaptchaLoading] = useState(false);
+  const [captchaNonce, setCaptchaNonce] = useState(0);
 
   const code = start?.chain.public_code ?? completedCode;
   const counter = useMemo(() => Array.from(draft).length, [draft]);
@@ -300,6 +313,23 @@ export function RelayApp() {
   }, [view, seconds]);
 
   useEffect(() => {
+    if (view !== "turn" || !start || captcha || captchaLoading) return;
+    let cancelled = false;
+    setCaptchaLoading(true);
+    void jsonRequest<{ token: string; prompt: string }>(`/api/v1/captcha?claim_id=${encodeURIComponent(start.claim.id)}&locale=${uiLocale}`)
+      .then((value) => {
+        if (!cancelled) setCaptcha(value);
+      })
+      .catch(() => {
+        if (!cancelled) setError(captchaCopy[uiLocale].invalid);
+      })
+      .finally(() => {
+        if (!cancelled) setCaptchaLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [captcha, captchaNonce, start, uiLocale, view]);
+
+  useEffect(() => {
     void fetch("/api/v1/stats/public")
       .then((response) => response.ok ? response.json() as Promise<PublicStats> : null)
       .then((value) => { if (value) setStats(value); })
@@ -312,6 +342,8 @@ export function RelayApp() {
     setCompletedCode("");
     setResult(null);
     setError("");
+    setCaptcha(null);
+    setCaptchaAnswer("");
     setView("starting");
     try {
       const csrfToken = await createSession();
@@ -345,7 +377,7 @@ export function RelayApp() {
   }
 
   async function submit() {
-    if (!start || !start.claim.claim_token || !draft.trim() || submitting) return;
+    if (!start || !start.claim.claim_token || !draft.trim() || !captcha || !captchaAnswer.trim() || submitting) return;
     setSubmitting(true);
     setError("");
     try {
@@ -367,6 +399,8 @@ export function RelayApp() {
           idempotency_key: submitIdempotencyKey,
           text: draft,
           country_code: country || null,
+          captcha_token: captcha.token,
+          captcha_answer: captchaAnswer.trim(),
         }),
       });
       setReceivedText(submittedText);
@@ -381,8 +415,16 @@ export function RelayApp() {
       storageRemove(window.sessionStorage, START_STATE_KEY);
       setStart(null);
       setDraft("");
+      setCaptcha(null);
+      setCaptchaAnswer("");
       setView("received");
     } catch (reason) {
+      if (reason instanceof ApiError && reason.code === "CAPTCHA_INVALID") {
+        setCaptcha(null);
+        setCaptchaAnswer("");
+        setError(captchaCopy[uiLocale].invalid);
+        return;
+      }
       if (reason instanceof ApiError && (reason.code === "CLAIM_EXPIRED" || reason.code === "CLAIM_CANCELLED")) {
         storageRemove(window.sessionStorage, START_STATE_KEY);
         setStart(null);
@@ -429,6 +471,8 @@ export function RelayApp() {
     setView("landing");
     setStart(null);
     setDraft("");
+    setCaptcha(null);
+    setCaptchaAnswer("");
     setError("");
     router.replace("/");
     if (!activeClaimId) return;
@@ -506,7 +550,7 @@ export function RelayApp() {
 
       {view === "starting" && <section className="flow-panel centered" aria-labelledby="starting-heading"><div className="spinner" aria-hidden="true" /><p id="starting-heading" role="status" aria-live="polite">Ищем свободный ход…</p></section>}
 
-      {view === "turn" && start && <section className="turn-layout turn-screen"><div className="turn-meta"><p className="screen-step">ШАГ 02 / 04 · ВАШ ХОД</p></div><div className="relay-rail" aria-hidden="true">{Array.from({ length: start.chain.target_hops }, (_, index) => <i className={index < start.claim.hop_index ? "is-done" : index + 1 === start.claim.hop_index ? "is-current" : ""} key={index}>{String(index + 1).padStart(2, "0")}</i>)}</div><h1 className="screen-title turn-display"><span>Перескажи.</span><span>Не переходи границу.</span></h1><p className="screen-intro">Вы видите только предыдущий шаг. Оригинал скрыт — так честнее.</p><article className="message-card"><span className="message-label">{start.previous_message.is_seed ? "ИСХОДНАЯ МЫСЛЬ" : `ПРЕДЫДУЩИЙ ХОД · ${start.previous_message.hop_index}`}</span><p>{start.previous_message.text}</p></article><div className="reply-card"><label htmlFor="draft">Перескажи эту мысль одним коротким предложением.<textarea id="draft" value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={500} placeholder="Сохрани главное…" /></label><div className="reply-footer"><span className={counter > 500 ? "warm" : ""}>{counter} / 500</span><div className="country-field"><span className="country-field-label">Страна на карте</span><span className={`country-signal country-signal-${country ? country.toLowerCase() : "none"}`} aria-hidden="true" /><select aria-label="Страна для карты" value={country} onChange={(event) => setCountry(event.target.value)}>{countryOptions.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></div><button className="primary-button" onClick={submit} disabled={submitting || seconds <= 0 || counter < 20}>{submitting ? "Передаём…" : seconds <= 0 ? "Время вышло" : "Передать дальше ↗"}</button></div></div><aside className="turn-sidecar"><div className="turn-timer"><span>ДО КОНЦА ХОДА</span><strong className={seconds === 0 ? "warm" : ""} aria-live="polite" aria-atomic="true">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</strong><div className="warm-track"><i style={{ width: `${Math.min(100, (seconds / TURN_TIMER_SECONDS) * 100)}%` }} /></div></div><div className="turn-memo"><span>ПАМЯТКА ХОДА</span><ol><li>У вас одна попытка</li><li>Ход истекает по таймеру</li><li>Сохраняйте только смысл</li></ol></div><button className="secondary-button" type="button" onClick={cancelClaim}>Отменить участие</button></aside>{error && <p className="inline-error" role="alert">{error}</p>}</section>}
+      {view === "turn" && start && <section className="turn-layout turn-screen"><div className="turn-meta"><p className="screen-step">ШАГ 02 / 04 · ВАШ ХОД</p></div><div className="relay-rail" aria-hidden="true">{Array.from({ length: start.chain.target_hops }, (_, index) => <i className={index < start.claim.hop_index ? "is-done" : index + 1 === start.claim.hop_index ? "is-current" : ""} key={index}>{String(index + 1).padStart(2, "0")}</i>)}</div><h1 className="screen-title turn-display"><span>Перескажи.</span><span>Не переходи границу.</span></h1><p className="screen-intro">Вы видите только предыдущий шаг. Оригинал скрыт — так честнее.</p><article className="message-card"><span className="message-label">{start.previous_message.is_seed ? "ИСХОДНАЯ МЫСЛЬ" : `ПРЕДЫДУЩИЙ ХОД · ${start.previous_message.hop_index}`}</span><p>{start.previous_message.text}</p></article><div className="reply-card"><label htmlFor="draft">Перескажи эту мысль одним коротким предложением.<textarea id="draft" value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={500} placeholder="Сохрани главное…" /></label><div className="captcha-field"><div><span className="captcha-label">{captchaCopy[uiLocale].label}</span><span className="captcha-prompt">{captcha?.prompt ?? "…"}</span></div><input id="captcha-answer" aria-label={captchaCopy[uiLocale].label} inputMode="numeric" autoComplete="off" value={captchaAnswer} onChange={(event) => setCaptchaAnswer(event.target.value.replace(/[^0-9]/gu, ""))} placeholder={captchaCopy[uiLocale].placeholder} maxLength={3} disabled={!captcha || captchaLoading} /><button type="button" className="captcha-refresh" onClick={() => { setCaptcha(null); setCaptchaAnswer(""); setCaptchaNonce((value) => value + 1); }} aria-label={captchaCopy[uiLocale].refresh}>↻</button></div><div className="reply-footer"><span className={counter > 500 ? "warm" : ""}>{counter} / 500</span><div className="country-field"><span className="country-field-label">Страна на карте</span><span className={`country-signal country-signal-${country ? country.toLowerCase() : "none"}`} aria-hidden="true" /><select aria-label="Страна для карты" value={country} onChange={(event) => setCountry(event.target.value)}>{countryOptions.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></div><button className="primary-button" onClick={submit} disabled={submitting || seconds <= 0 || counter < 20 || !captcha || !captchaAnswer.trim()}>{submitting ? "Передаём…" : seconds <= 0 ? "Время вышло" : "Передать дальше ↗"}</button></div></div><aside className="turn-sidecar"><div className="turn-timer"><span>ДО КОНЦА ХОДА</span><strong className={seconds === 0 ? "warm" : ""} aria-live="polite" aria-atomic="true">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</strong><div className="warm-track"><i style={{ width: `${Math.min(100, (seconds / TURN_TIMER_SECONDS) * 100)}%` }} /></div></div><div className="turn-memo"><span>ПАМЯТКА ХОДА</span><ol><li>У вас одна попытка</li><li>Ход истекает по таймеру</li><li>Сохраняйте только смысл</li></ol></div><button className="secondary-button" type="button" onClick={cancelClaim}>Отменить участие</button></aside>{error && <p className="inline-error" role="alert">{error}</p>}</section>}
 
       {view === "received" && submitResult && <section className="flow-panel received"><p className="kicker">ХОД СОХРАНЁН</p><div className="checkmark">✓</div><h2>Ты передал мысль дальше.</h2><p className="received-copy">Твой текст стал {submitResult.hop}-м звеном цепочки. Теперь следующий участник увидит только его.</p><div className="received-quote">{receivedText}</div><div className="received-progress"><span>ПРОГРЕСС ЦЕПОЧКИ</span><strong>{submitResult.current} / {submitResult.target}</strong><div className="progress-track"><i style={{ width: `${(submitResult.current / submitResult.target) * 100}%` }} /></div></div><div className="hero-actions">{submitResult.completed ? <button className="primary-button" onClick={openResult}>Открыть результат ↗</button> : <button className="primary-button" onClick={() => setView("landing")}>Вернуться на главную</button>}<button className="secondary-button" onClick={openResult}>Открыть страницу цепочки</button>{!submitResult.completed && <button className="secondary-button" onClick={() => void copyInvite()}>Пригласить следующего</button>}</div>{inviteNotice && <p className="share-notice" role="status" aria-live="polite">{inviteNotice}</p>}</section>}
 

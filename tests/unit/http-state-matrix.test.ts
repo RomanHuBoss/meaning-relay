@@ -2,6 +2,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
 import { RelayError } from "../../packages/shared/types/relay";
+import { issueCaptcha } from "../../lib/http/captcha";
 
 const fakeRuntime = vi.hoisted(() => ({
   cancel: vi.fn(),
@@ -25,6 +26,12 @@ const publicCode = "123456789A";
 const claimToken = "claim-token";
 const idempotencyKey = "11111111-1111-4111-8111-111111111111";
 const recoverKey = "22222222-2222-4222-8222-222222222222";
+
+function captchaFields(claimId = "claim"): { captcha_token: string; captcha_answer: string } {
+  const issued = issueCaptcha(claimId, "ru");
+  const payload = JSON.parse(Buffer.from(issued.token.split(".")[0], "base64url").toString("utf8")) as { a: number; b: number };
+  return { captcha_token: issued.token, captcha_answer: String(payload.a + payload.b) };
+}
 
 function postRequest(url: string, body: unknown, options: { session?: boolean; sidValue?: string } = {}): NextRequest {
   const headers = new Headers({ "content-type": "application/json", "x-csrf-token": csrf });
@@ -63,6 +70,7 @@ describe("HTTP terminal-state and public serialization matrix", () => {
         idempotency_key: idempotencyKey,
         text: "Текст, достаточно длинный для прохождения минимальной длины.",
         country_code: null,
+        ...captchaFields(),
       }),
       { params: Promise.resolve({ claimId: "claim" }) },
     );

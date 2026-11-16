@@ -10,6 +10,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="ru">
+      <head>
+        <link rel="preload" href="/galaxy-nebula.png" as="image" />
+      </head>
       <body>
         {/* Декоративный космический слой остаётся скрытым от чтения с экрана и не перехватывает ввод. */}
         <div className="galaxy-backdrop" aria-hidden="true">
