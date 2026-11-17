@@ -56,4 +56,16 @@ describe("UX and P1 source contracts", () => {
     expect(relayApp).toMatch(/onNavigate=\{navigateFromFlow\}/u);
     expect(relayApp).toMatch(/onClick=\{\(\) => void cancelClaim\(\)\}/u);
   });
+
+  it("explains that the invite link is for the next participant", () => {
+    expect(relayApp).toMatch(/Скопируй ссылку и отправь её человеку, который продолжит следующий ход/u);
+    expect(relayApp).toMatch(/Скопировать ссылку следующему участнику/u);
+  });
+
+  it("keeps an active chain status separate from a completed result", () => {
+    expect(relayApp).toMatch(/const resultCompleted = result\?\.chain\.status === "COMPLETED"/u);
+    expect(relayApp).toMatch(/ЦЕПОЧКА ПРОДОЛЖАЕТСЯ/u);
+    expect(relayApp).toMatch(/Следующий участник продолжит/u);
+    expect(relayApp).toMatch(/На карте страны, выбранные менее чем в 5 передачах/u);
+  });
 });

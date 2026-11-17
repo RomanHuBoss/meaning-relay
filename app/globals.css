@@ -2182,6 +2182,12 @@ main.site-shell .country-field-label {
   text-transform: uppercase;
   white-space: nowrap;
 }
+main.site-shell .country-hint {
+  margin: 10px 0 0;
+  color: rgba(220, 226, 222, .58);
+  font-size: 12px;
+  line-height: 1.45;
+}
 main.site-shell .country-field select {
   width: 132px;
   margin-left: 0;
