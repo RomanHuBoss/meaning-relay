@@ -2,7 +2,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LANGUAGE_LABELS, SUPPORTED_LANGUAGES, type Language } from "../../packages/shared/constants";
 import { LocalePicker, type UiLocale, useUiLocale } from "../../components/locale-picker";
 import { PublicNav } from "../../components/public-nav";
@@ -45,8 +45,10 @@ export default function ChainsPage() {
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const requestSequence = useRef(0);
 
   async function load(reset = false, cursorOverride: string | null = null) {
+    const requestId = ++requestSequence.current;
     setLoading(true);
     setError("");
     try {
@@ -56,12 +58,14 @@ export default function ChainsPage() {
       const response = await fetch(`/api/v1/chains?${params.toString()}`);
       const body = await response.json() as GalleryResponse & { error?: { message?: string } };
       if (!response.ok) throw new Error(body.error?.message ?? "Не удалось загрузить цепочки");
+      if (requestId !== requestSequence.current) return;
       setChains((current) => reset ? body.chains : [...current, ...body.chains]);
       setNextCursor(body.next_cursor);
     } catch (reason) {
+      if (requestId !== requestSequence.current) return;
       setError(reason instanceof Error ? reason.message : "Не удалось загрузить цепочки");
     } finally {
-      setLoading(false);
+      if (requestId === requestSequence.current) setLoading(false);
     }
   }
 

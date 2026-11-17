@@ -66,6 +66,6 @@ describe("UX and P1 source contracts", () => {
     expect(relayApp).toMatch(/const resultCompleted = result\?\.chain\.status === "COMPLETED"/u);
     expect(relayApp).toMatch(/ЦЕПОЧКА ПРОДОЛЖАЕТСЯ/u);
     expect(relayApp).toMatch(/Следующий участник продолжит/u);
-    expect(relayApp).toMatch(/На карте страны, выбранные менее чем в 5 передачах/u);
+    expect(relayApp).toMatch(/На карте за выбранный период страны с количеством передач менее 5/u);
   });
 });

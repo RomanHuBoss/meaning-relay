@@ -13,8 +13,8 @@ export async function POST(
   }
   const { claimId } = await context.params;
   const session = ensureSession(request);
-  await persistSession(session.sid);
   try {
+    await persistSession(session.sid);
     await relayRuntime.cancel(claimId, session.sessionHash);
     return new NextResponse(null, { status: 204 });
   } catch (error) {

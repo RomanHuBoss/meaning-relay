@@ -9,18 +9,22 @@ import {
   newCsrfToken,
   persistSession,
 } from "../../../../lib/http/session";
-import { requestErrorResponse } from "../../../../lib/http/errors";
+import { relayErrorResponse, requestErrorResponse } from "../../../../lib/http/errors";
 
 export async function POST(request: NextRequest) {
   if (!csrfMatches(request)) {
     return requestErrorResponse("CSRF_INVALID", 403, "CSRF token is invalid");
   }
   const session = ensureSession(request);
-  const expiresAt = await persistSession(session.sid);
-  const response = NextResponse.json({
-    session: { expires_at: expiresAt.toISOString() },
-  }, { status: 201 });
-  if (session.isNew) attachSessionCookie(response, session.sid);
-  attachCsrfCookie(response, request.cookies.get(CSRF_COOKIE)?.value ?? newCsrfToken());
-  return response;
+  try {
+    const expiresAt = await persistSession(session.sid);
+    const response = NextResponse.json({
+      session: { expires_at: expiresAt.toISOString() },
+    }, { status: 201 });
+    if (session.isNew) attachSessionCookie(response, session.sid);
+    attachCsrfCookie(response, request.cookies.get(CSRF_COOKIE)?.value ?? newCsrfToken());
+    return response;
+  } catch (error) {
+    return relayErrorResponse(error);
+  }
 }
