@@ -99,12 +99,13 @@ test.describe("browser public pages", () => {
   test.skip(!process.env.E2E_BROWSER, "Set E2E_BROWSER=1 in an environment with a runnable Chromium binary");
 
   test("render", async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("meaning-relay:ui-locale", "ru"));
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "Передай мысль дальше." })).toBeVisible();
     await page.goto("/chains");
     await expect(page.getByRole("heading", { name: "Цепочки, которые дошли до конца." })).toBeVisible();
     await page.goto("/map");
-    await expect(page.getByRole("heading", { name: "Мысль движется между людьми." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Сигнал по миру." })).toBeVisible();
     await page.goto("/about");
     await expect(page.getByRole("heading", { name: "Смысл меняется, пока идёт дальше." })).toBeVisible();
   });

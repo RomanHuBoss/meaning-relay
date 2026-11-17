@@ -39,4 +39,21 @@ describe("UX and P1 source contracts", () => {
     expect(relayApp).toMatch(/router\.push\("\/\?join=1"\)/u);
     expect(relayApp).toMatch(/router\.replace\("\/"\)/u);
   });
+
+  it("releases an active claim before switching to another language", () => {
+    expect(relayApp).toMatch(/async function cancelClaim\(returnToLanguage = false(?:, navigate = true)?\)/u);
+    expect(relayApp).toMatch(/if \(view === "turn" && start\?\.claim\.id\) \{\s*await cancelClaim\(true\)/u);
+    expect(relayApp).toMatch(/if \(!cancelled\) return false;/u);
+    expect(relayApp).toMatch(/if \(returnToLanguage(?: && navigate)?\) \{[\s\S]*?router\.push\("\/\?join=1"\)/u);
+    expect(relayApp).not.toMatch(/const legacyKey = requestedCode \? null : storageGet\(window\.localStorage, START_KEY\)/u);
+    expect(relayApp).toMatch(/if \(!hydrated \|\| !didNavigate \|\| pathname !== "\/"/u);
+    expect(relayApp).toMatch(/if \(view === "turn" && start\?\.claim\.id\) \{\s*void cancelClaim\(\)/u);
+  });
+
+  it("releases a claim before browser navigation leaves the relay flow", () => {
+    expect(relayApp).toMatch(/async function navigateFromFlow\(href: string\)/u);
+    expect(relayApp).toMatch(/cancelClaim\(false, false\)/u);
+    expect(relayApp).toMatch(/onNavigate=\{navigateFromFlow\}/u);
+    expect(relayApp).toMatch(/onClick=\{\(\) => void cancelClaim\(\)\}/u);
+  });
 });

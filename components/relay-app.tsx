@@ -82,17 +82,19 @@ const languageLabels: Record<UiLocale, Record<Language, string>> = {
   hi: { ru: "रूसी", en: "अंग्रेज़ी", zh: "चीनी", fr: "फ़्रेंच", hi: "हिंदी", es: "स्पेनिश" },
 };
 
-const errorCopy: Record<UiLocale, { kicker: string; back: string; unavailable: string; generic: string; retry: string }> = {
-  ru: { kicker: "ЧТО-ТО ПОШЛО НЕ ТАК", back: "Вернуться", unavailable: "Цепочка временно недоступна", generic: "Не удалось начать цепочку", retry: "Попробуйте ещё раз" },
-  en: { kicker: "SOMETHING WENT WRONG", back: "Back", unavailable: "The chain is temporarily unavailable", generic: "The chain could not be started", retry: "Please try again" },
-  es: { kicker: "ALGO SALIÓ MAL", back: "Volver", unavailable: "La cadena no está disponible temporalmente", generic: "No se pudo iniciar la cadena", retry: "Inténtalo de nuevo" },
-  zh: { kicker: "出现了一点问题", back: "返回", unavailable: "链条暂时不可用", generic: "无法开始链条", retry: "请重试" },
-  fr: { kicker: "UNE ERREUR EST SURVENUE", back: "Retour", unavailable: "La chaîne est temporairement indisponible", generic: "Impossible de démarrer la chaîne", retry: "Réessayez" },
-  hi: { kicker: "कुछ गड़बड़ हो गई", back: "वापस", unavailable: "श्रृंखला अभी उपलब्ध नहीं है", generic: "श्रृंखला शुरू नहीं हो सकी", retry: "फिर कोशिश करें" },
+const errorCopy: Record<UiLocale, { kicker: string; back: string; unavailable: string; generic: string; retry: string; active: string }> = {
+  ru: { kicker: "ЧТО-ТО ПОШЛО НЕ ТАК", back: "Вернуться", unavailable: "Цепочка временно недоступна", generic: "Не удалось начать цепочку", retry: "Попробуйте ещё раз", active: "У вас уже есть незавершённый ход. Вернитесь к нему или отмените его." },
+  en: { kicker: "SOMETHING WENT WRONG", back: "Back", unavailable: "The chain is temporarily unavailable", generic: "The chain could not be started", retry: "Please try again", active: "You already have an unfinished turn. Return to it or cancel it." },
+  es: { kicker: "ALGO SALIÓ MAL", back: "Volver", unavailable: "La cadena no está disponible temporalmente", generic: "No se pudo iniciar la cadena", retry: "Inténtalo de nuevo", active: "Ya tienes un turno sin terminar. Vuelve a él o cancélalo." },
+  zh: { kicker: "出现了一点问题", back: "返回", unavailable: "链条暂时不可用", generic: "无法开始链条", retry: "请重试", active: "你已经有一个未完成的回合。请返回继续或取消。" },
+  fr: { kicker: "UNE ERREUR EST SURVENUE", back: "Retour", unavailable: "La chaîne est temporairement indisponible", generic: "Impossible de démarrer la chaîne", retry: "Réessayez", active: "Vous avez déjà un tour en cours. Revenez-y ou annulez-le." },
+  hi: { kicker: "कुछ गड़बड़ हो गई", back: "वापस", unavailable: "श्रृंखला अभी उपलब्ध नहीं है", generic: "श्रृंखला शुरू नहीं हो सकी", retry: "फिर कोशिश करें", active: "आपका एक चरण अभी पूरा नहीं हुआ है। उसमें लौटें या उसे रद्द करें।" },
 };
 
 function localizedStartError(locale: UiLocale, reason: unknown): string {
-  if (reason instanceof ApiError && reason.code === "START_IDEMPOTENCY_REUSED") return errorCopy[locale].retry;
+  if (reason instanceof ApiError && reason.code === "SESSION_HAS_ACTIVE_CLAIM") return errorCopy[locale].active;
+  if (reason instanceof ApiError && ["START_IDEMPOTENCY_REUSED", "CHAIN_BUSY"].includes(reason.code ?? "")) return errorCopy[locale].retry;
+  if (reason instanceof ApiError && ["NO_CHAIN_AVAILABLE", "CHAIN_COMPLETED", "CHAIN_PAUSED", "CHAIN_ARCHIVED"].includes(reason.code ?? "")) return errorCopy[locale].unavailable;
   if (reason instanceof ApiError) return errorCopy[locale].generic;
   if (reason instanceof Error && reason.message) return reason.message;
   return errorCopy[locale].generic;
@@ -219,6 +221,7 @@ export function RelayApp() {
   const [captchaAnswer, setCaptchaAnswer] = useState("");
   const [captchaLoading, setCaptchaLoading] = useState(false);
   const [captchaNonce, setCaptchaNonce] = useState(0);
+  const [cancelling, setCancelling] = useState(false);
 
   const code = start?.chain.public_code ?? completedCode;
   const counter = useMemo(() => Array.from(draft).length, [draft]);
@@ -294,8 +297,18 @@ export function RelayApp() {
     previousNavigationKey.current = navigationKey;
     if (!hydrated || !didNavigate || pathname !== "/" || searchParams.get("code")) return;
     if (searchParams.get("join") === "1") {
+      // Переход на /?join=1 и кнопка браузера «назад» могут вернуть сюда со
+      // старым активным ходом. Перед новым выбором языка освобождаем его.
+      if (view === "turn" && start?.claim.id) {
+        void cancelClaim(true);
+        return;
+      }
       setError("");
       setView("language");
+      return;
+    }
+    if (view === "turn" && start?.claim.id) {
+      void cancelClaim();
       return;
     }
     if (view === "language" || view === "join" || view === "error") {
@@ -304,7 +317,7 @@ export function RelayApp() {
       setError("");
       setView("landing");
     }
-  }, [hydrated, navigationKey, pathname, searchParams, view]);
+  }, [hydrated, navigationKey, pathname, searchParams, start, view]);
 
   useEffect(() => {
     if (view !== "turn" || seconds <= 0) return;
@@ -349,12 +362,13 @@ export function RelayApp() {
       const csrfToken = await createSession();
       setCsrf(csrfToken);
       const keyName = startStorageKey(languageChoice, requestedCode);
-      const legacyKey = requestedCode ? null : storageGet(window.localStorage, START_KEY);
-      const startKey = storageGet(window.localStorage, keyName) ?? legacyKey ?? window.crypto.randomUUID();
+      // Старый ключ без языка мог быть создан для другой цепочки. Его повторное
+      // использование меняет хеш запроса и даёт ложную ошибку идемпотентности.
+      const startKey = storageGet(window.localStorage, keyName) ?? window.crypto.randomUUID();
       const savedLastCode = requestedCode ? null : storageGet(window.sessionStorage, LAST_PARTICIPATED_CHAIN_KEY);
       const excludedPublicCode = savedLastCode && /^[1-9A-HJ-NP-Za-km-z]{10}$/u.test(savedLastCode) ? savedLastCode : null;
       storageSet(window.localStorage, keyName, startKey);
-      if (!requestedCode) storageSet(window.localStorage, START_KEY, startKey);
+      storageRemove(window.localStorage, START_KEY);
       const response = await jsonRequest<StartResponse>("/api/v1/participation/start", {
         method: "POST",
         headers: { "X-CSRF-Token": csrfToken },
@@ -418,6 +432,7 @@ export function RelayApp() {
       setCaptcha(null);
       setCaptchaAnswer("");
       setView("received");
+      router.replace("/");
     } catch (reason) {
       if (reason instanceof ApiError && reason.code === "CAPTCHA_INVALID") {
         setCaptcha(null);
@@ -427,7 +442,15 @@ export function RelayApp() {
       }
       if (reason instanceof ApiError && (reason.code === "CLAIM_EXPIRED" || reason.code === "CLAIM_CANCELLED")) {
         storageRemove(window.sessionStorage, START_STATE_KEY);
+        storageRemove(window.localStorage, startStorageKey(language, null));
+        storageRemove(window.localStorage, startStorageKey(language, start.chain.public_code));
+        storageRemove(window.localStorage, START_KEY);
+        storageRemove(window.localStorage, DRAFT_KEY);
+        storageRemove(window.localStorage, SUBMIT_STATE_KEY);
         setStart(null);
+        setDraft("");
+        setCaptcha(null);
+        setCaptchaAnswer("");
         setView("error");
       }
       setError(reason instanceof ApiError ? errorCopy[uiLocale].generic : reason instanceof Error ? reason.message : errorCopy[uiLocale].generic);
@@ -459,9 +482,39 @@ export function RelayApp() {
     }
   }
 
-  async function cancelClaim(): Promise<void> {
+  async function cancelClaim(returnToLanguage = false, navigate = true): Promise<boolean> {
+    if (cancelling) return false;
     const activeClaimId = start?.claim.id;
     const activeCode = start?.chain.public_code;
+    setCancelling(true);
+    let cancelled = !activeClaimId;
+    try {
+      // Завершаем отмену на сервере до перехода на выбор языка. Иначе
+      // быстрый повторный клик может встретить старую активную заявку.
+      if (activeClaimId) {
+        const csrfToken = csrf || (await createSession());
+        setCsrf(csrfToken);
+        await jsonRequest<unknown>(`/api/v1/claims/${activeClaimId}/cancel`, {
+          method: "POST",
+          headers: { "X-CSRF-Token": csrfToken },
+          body: "{}",
+        });
+        cancelled = true;
+      }
+    } catch (reason) {
+      const terminal = reason instanceof ApiError && ["CLAIM_EXPIRED", "CLAIM_CANCELLED", "CLAIM_NOT_FOUND", "CLAIM_SUBMITTED"].includes(reason.code ?? "");
+      if (terminal) {
+        cancelled = true;
+      } else {
+        // При сетевой ошибке сохраняем локальную заявку: сервер мог принять
+        // отмену, а мог сохранить ход, поэтому продолжение должно быть доступно.
+        setError(reason instanceof ApiError ? errorCopy[uiLocale].generic : reason instanceof Error ? reason.message : errorCopy[uiLocale].generic);
+      }
+    } finally {
+      setCancelling(false);
+    }
+    if (!cancelled) return false;
+
     storageRemove(window.sessionStorage, START_STATE_KEY);
     storageRemove(window.localStorage, startStorageKey(language, null));
     storageRemove(window.localStorage, START_KEY);
@@ -474,31 +527,44 @@ export function RelayApp() {
     setCaptcha(null);
     setCaptchaAnswer("");
     setError("");
-    router.replace("/");
-    if (!activeClaimId) return;
-    try {
-      const csrfToken = csrf || (await createSession());
-      setCsrf(csrfToken);
-      await jsonRequest<unknown>(`/api/v1/claims/${activeClaimId}/cancel`, {
-        method: "POST",
-        headers: { "X-CSRF-Token": csrfToken },
-        body: "{}",
-      });
-    } catch {
-      // Локальное состояние уже очищено, поэтому обновление страницы не восстановит ход.
+    if (returnToLanguage && navigate) {
+      setSelectedLanguage(language);
+      setView("language");
+      router.push("/?join=1");
+    } else if (navigate) {
+      setView("landing");
+      router.replace("/");
+    } else {
+      setView("landing");
     }
+    return true;
   }
 
-  function openLanguage(): void {
+  async function openLanguage(): Promise<void> {
+    if (cancelling) return;
+    if (view === "starting" || submitting) return;
+    if (view === "turn" && start?.claim.id) {
+      await cancelClaim(true);
+      return;
+    }
     setSelectedLanguage(language);
     setView("language");
     router.push("/?join=1");
   }
 
+  async function navigateFromFlow(href: string): Promise<void> {
+    if (view === "starting" || submitting || cancelling) return;
+    if (start?.claim.id) {
+      const released = await cancelClaim(false, false);
+      if (!released) return;
+    }
+    router.push(href);
+  }
+
   return (
     <main className="site-shell">
       <div className="system-bar"><SiteBrand /><SystemStatus kind="stable" /><div className="system-bar-right"><LocalePicker /></div></div>
-      <PublicNav active={view === "landing" ? "home" : undefined} onJoin={openLanguage} />
+      <PublicNav active={view === "landing" ? "home" : undefined} onJoin={openLanguage} onNavigate={navigateFromFlow} />
 
       {view === "landing" && (
         <>
@@ -550,13 +616,13 @@ export function RelayApp() {
 
       {view === "starting" && <section className="flow-panel centered" aria-labelledby="starting-heading"><div className="spinner" aria-hidden="true" /><p id="starting-heading" role="status" aria-live="polite">Ищем свободный ход…</p></section>}
 
-      {view === "turn" && start && <section className="turn-layout turn-screen"><div className="turn-meta"><p className="screen-step">ШАГ 02 / 04 · ВАШ ХОД</p></div><div className="relay-rail" aria-hidden="true">{Array.from({ length: start.chain.target_hops }, (_, index) => <i className={index < start.claim.hop_index ? "is-done" : index + 1 === start.claim.hop_index ? "is-current" : ""} key={index}>{String(index + 1).padStart(2, "0")}</i>)}</div><h1 className="screen-title turn-display"><span>Перескажи.</span><span>Не переходи границу.</span></h1><p className="screen-intro">Вы видите только предыдущий шаг. Оригинал скрыт — так честнее.</p><article className="message-card"><span className="message-label">{start.previous_message.is_seed ? "ИСХОДНАЯ МЫСЛЬ" : `ПРЕДЫДУЩИЙ ХОД · ${start.previous_message.hop_index}`}</span><p>{start.previous_message.text}</p></article><div className="reply-card"><label htmlFor="draft">Перескажи эту мысль одним коротким предложением.<textarea id="draft" value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={500} placeholder="Сохрани главное…" /></label><div className="captcha-field"><div><span className="captcha-label">{captchaCopy[uiLocale].label}</span><span className="captcha-prompt">{captcha?.prompt ?? "…"}</span></div><input id="captcha-answer" aria-label={captchaCopy[uiLocale].label} inputMode="numeric" autoComplete="off" value={captchaAnswer} onChange={(event) => setCaptchaAnswer(event.target.value.replace(/[^0-9]/gu, ""))} placeholder={captchaCopy[uiLocale].placeholder} maxLength={3} disabled={!captcha || captchaLoading} /><button type="button" className="captcha-refresh" onClick={() => { setCaptcha(null); setCaptchaAnswer(""); setCaptchaNonce((value) => value + 1); }} aria-label={captchaCopy[uiLocale].refresh}>↻</button></div><div className="reply-footer"><span className={counter > 500 ? "warm" : ""}>{counter} / 500</span><div className="country-field"><span className="country-field-label">Страна на карте</span><span className={`country-signal country-signal-${country ? country.toLowerCase() : "none"}`} aria-hidden="true" /><select aria-label="Страна для карты" value={country} onChange={(event) => setCountry(event.target.value)}>{countryOptions.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></div><button className="primary-button" onClick={submit} disabled={submitting || seconds <= 0 || counter < 20 || !captcha || !captchaAnswer.trim()}>{submitting ? "Передаём…" : seconds <= 0 ? "Время вышло" : "Передать дальше ↗"}</button></div></div><aside className="turn-sidecar"><div className="turn-timer"><span>ДО КОНЦА ХОДА</span><strong className={seconds === 0 ? "warm" : ""} aria-live="polite" aria-atomic="true">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</strong><div className="warm-track"><i style={{ width: `${Math.min(100, (seconds / TURN_TIMER_SECONDS) * 100)}%` }} /></div></div><div className="turn-memo"><span>ПАМЯТКА ХОДА</span><ol><li>У вас одна попытка</li><li>Ход истекает по таймеру</li><li>Сохраняйте только смысл</li></ol></div><button className="secondary-button" type="button" onClick={cancelClaim}>Отменить участие</button></aside>{error && <p className="inline-error" role="alert">{error}</p>}</section>}
+      {view === "turn" && start && <section className="turn-layout turn-screen"><div className="turn-meta"><p className="screen-step">ШАГ 02 / 04 · ВАШ ХОД</p></div><div className="relay-rail" aria-hidden="true">{Array.from({ length: start.chain.target_hops }, (_, index) => <i className={index < start.claim.hop_index ? "is-done" : index + 1 === start.claim.hop_index ? "is-current" : ""} key={index}>{String(index + 1).padStart(2, "0")}</i>)}</div><h1 className="screen-title turn-display"><span>Перескажи.</span><span>Не переходи границу.</span></h1><p className="screen-intro">Вы видите только предыдущий шаг. Оригинал скрыт — так честнее.</p><article className="message-card"><span className="message-label">{start.previous_message.is_seed ? "ИСХОДНАЯ МЫСЛЬ" : `ПРЕДЫДУЩИЙ ХОД · ${start.previous_message.hop_index}`}</span><p>{start.previous_message.text}</p></article><div className="reply-card"><label htmlFor="draft">Перескажи эту мысль одним коротким предложением.<textarea id="draft" value={draft} onChange={(event) => setDraft(event.target.value)} maxLength={500} placeholder="Сохрани главное…" /></label><div className="captcha-field"><div><span className="captcha-label">{captchaCopy[uiLocale].label}</span><span className="captcha-prompt">{captcha?.prompt ?? "…"}</span></div><input id="captcha-answer" aria-label={captchaCopy[uiLocale].label} inputMode="numeric" autoComplete="off" value={captchaAnswer} onChange={(event) => setCaptchaAnswer(event.target.value.replace(/[^0-9]/gu, ""))} placeholder={captchaCopy[uiLocale].placeholder} maxLength={3} disabled={!captcha || captchaLoading} /><button type="button" className="captcha-refresh" onClick={() => { setCaptcha(null); setCaptchaAnswer(""); setCaptchaNonce((value) => value + 1); }} aria-label={captchaCopy[uiLocale].refresh}>↻</button></div><div className="reply-footer"><span className={counter > 500 ? "warm" : ""}>{counter} / 500</span><div className="country-field"><span className="country-field-label">Страна на карте</span><span className={`country-signal country-signal-${country ? country.toLowerCase() : "none"}`} aria-hidden="true" /><select aria-label="Страна для карты" value={country} onChange={(event) => setCountry(event.target.value)}>{countryOptions.map(([value, label]) => <option value={value} key={value}>{label}</option>)}</select></div><button className="primary-button" onClick={submit} disabled={submitting || seconds <= 0 || counter < 20 || !captcha || !captchaAnswer.trim()}>{submitting ? "Передаём…" : seconds <= 0 ? "Время вышло" : "Передать дальше ↗"}</button></div></div><aside className="turn-sidecar"><div className="turn-timer"><span>ДО КОНЦА ХОДА</span><strong className={seconds === 0 ? "warm" : ""} aria-live="polite" aria-atomic="true">{String(Math.floor(seconds / 60)).padStart(2, "0")}:{String(seconds % 60).padStart(2, "0")}</strong><div className="warm-track"><i style={{ width: `${Math.min(100, (seconds / TURN_TIMER_SECONDS) * 100)}%` }} /></div></div><div className="turn-memo"><span>ПАМЯТКА ХОДА</span><ol><li>У вас одна попытка</li><li>Ход истекает по таймеру</li><li>Сохраняйте только смысл</li></ol></div><button className="secondary-button" type="button" onClick={() => void cancelClaim()} disabled={cancelling}>{cancelling ? "Отменяем…" : "Отменить участие"}</button></aside>{error && <p className="inline-error" role="alert">{error}</p>}</section>}
 
       {view === "received" && submitResult && <section className="flow-panel received"><p className="kicker">ХОД СОХРАНЁН</p><div className="checkmark">✓</div><h2>Ты передал мысль дальше.</h2><p className="received-copy">Твой текст стал {submitResult.hop}-м звеном цепочки. Теперь следующий участник увидит только его.</p><div className="received-quote">{receivedText}</div><div className="received-progress"><span>ПРОГРЕСС ЦЕПОЧКИ</span><strong>{submitResult.current} / {submitResult.target}</strong><div className="progress-track"><i style={{ width: `${(submitResult.current / submitResult.target) * 100}%` }} /></div></div><div className="hero-actions">{submitResult.completed ? <button className="primary-button" onClick={openResult}>Открыть результат ↗</button> : <button className="primary-button" onClick={() => setView("landing")}>Вернуться на главную</button>}<button className="secondary-button" onClick={openResult}>Открыть страницу цепочки</button>{!submitResult.completed && <button className="secondary-button" onClick={() => void copyInvite()}>Пригласить следующего</button>}</div>{inviteNotice && <p className="share-notice" role="status" aria-live="polite">{inviteNotice}</p>}</section>}
 
       {view === "result" && result && <section className="result-layout result-screen"><div className="result-heading"><p className="screen-step">ШАГ 03 / 04 · ХОД ПРИНЯТ · ДРЕЙФ ФИКСИРУЕТСЯ</p><p className="kicker">ЗАВЕРШЁННАЯ ЦЕПОЧКА</p><h2 className="screen-title"><span>Шаг записан.</span><span className="display-outline">Смысл уже не тот.</span></h2><p>{result.chain.current_hop} из {result.chain.target_hops} ходов · {LANGUAGE_LABELS[result.chain.language]}</p></div>{result.seed && <article className="result-seed"><span>НАЧАЛО · ШАГ 01</span><p>{result.seed.text}</p></article>}<div className="message-timeline">{result.messages?.map((message) => <article key={message.hop_index} className={message.hop_index === result.chain.target_hops ? "timeline-card final" : "timeline-card"}><span>ХОД {message.hop_index}</span><p>{message.text}</p></article>)}</div>{result.metrics && <div className="metrics-grid"><div><strong>{result.metrics.token_overlap_percent}%</strong><span>дрейф смысла</span></div><div><strong>{result.metrics.seed_character_count}</strong><span>символов в начале</span></div><div><strong>{result.metrics.final_character_count}</strong><span>символов в финале</span></div></div>}</section>}
 
-      {view === "error" && <section className="flow-panel centered" aria-labelledby="error-heading"><p className="kicker">{errorCopy[uiLocale].kicker}</p><h2 id="error-heading">{error || errorCopy[uiLocale].unavailable}</h2><button className="primary-button" onClick={() => setView("landing")}>{errorCopy[uiLocale].back}</button></section>}
+      {view === "error" && <section className="flow-panel centered" aria-labelledby="error-heading"><p className="kicker">{errorCopy[uiLocale].kicker}</p><h2 id="error-heading">{error || errorCopy[uiLocale].unavailable}</h2><button className="primary-button" onClick={() => { setError(""); setView("landing"); router.replace("/"); }}>{errorCopy[uiLocale].back}</button></section>}
 
       <footer><span>СМЫСЛОВОЙ ТЕЛЕФОН</span><span>Читай · Пересказывай · Передавай</span></footer>
     </main>
